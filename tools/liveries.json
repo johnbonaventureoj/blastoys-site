@@ -1,0 +1,47 @@
+{
+  "_note": "ILLUSTRATIVE EXAMPLES ONLY. These are invented firms. Never publish a real haulage company's livery, name or logo on the public site without written permission - that is trademark use, the same family of risk as putting a Scania or Volvo cab shape on the product. Real-firm mockups are for sending privately to that firm as outreach.",
+  "liveries": [
+    {
+      "slug": "halden",
+      "firm": "Halden & Sons",
+      "strap": "Family haulier, traditional two-tone",
+      "cab_top": "#c0392b",
+      "cab_bot": "#7b1a10",
+      "box_top": "#f4efe4",
+      "box_bot": "#d8cfbc",
+      "box_inner": "#ece5d6",
+      "livery_text": "HALDEN & SONS",
+      "livery_fill": "#7b1a10",
+      "band": "#c0392b",
+      "plate": "H14 LDN"
+    },
+    {
+      "slug": "corvus",
+      "firm": "Corvus Logistics",
+      "strap": "Modern fleet, high-contrast wrap",
+      "cab_top": "#3d4550",
+      "cab_bot": "#16191f",
+      "box_top": "#f07817",
+      "box_bot": "#a34a05",
+      "box_inner": "#e06a10",
+      "livery_text": "CORVUS",
+      "livery_fill": "#1b1e24",
+      "band": "#16191f",
+      "plate": "C0 RVS"
+    },
+    {
+      "slug": "wealdstone",
+      "firm": "Wealdstone Transport",
+      "strap": "Regional distribution, single-colour",
+      "cab_top": "#2e8b57",
+      "cab_bot": "#14512f",
+      "box_top": "#ffffff",
+      "box_bot": "#dfe6e2",
+      "box_inner": "#f2f6f4",
+      "livery_text": "WEALDSTONE",
+      "livery_fill": "#14512f",
+      "band": "#2e8b57",
+      "plate": "W8 STN"
+    }
+  ]
+}
