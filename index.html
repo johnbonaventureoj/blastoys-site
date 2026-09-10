@@ -365,6 +365,66 @@
   </div>
 </div>
 
+<!-- ========================= EXAMPLES ========================== -->
+<style>
+  .ex-grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(290px,1fr))}
+  .ex{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+  /* The poster shows through if the clip never decodes, so a broken video
+     degrades to a still frame rather than a black hole. */
+  .ex video{width:100%;height:auto;display:block;background:#0b1f33;aspect-ratio:16/9}
+  .ex .meta{padding:15px 17px 17px}
+  .ex .meta h3{margin:0 0 3px;font-size:16px;color:var(--navy)}
+  .ex .meta p{margin:0;font-size:14px;color:var(--muted)}
+  .ex-note{margin-top:26px;font-size:13.5px;color:#8896a4;max-width:760px}
+</style>
+<section>
+  <div class="wrap">
+    <h2>Worked examples</h2>
+    <p class="sub">Three fleets, three liveries, the same model taken apart.
+       This is what your own firm's proof looks like before anything is made.</p>
+
+    <div class="ex-grid">
+      <div class="ex">
+        <video muted loop playsinline preload="metadata"
+               poster="media/exploded-halden.jpg"
+               aria-label="Exploded view of a model truck in a traditional two-tone livery">
+          <source src="media/exploded-halden.webm" type="video/webm">
+          <source src="media/exploded-halden.mp4" type="video/mp4">
+        </video>
+        <div class="meta"><h3>Halden &amp; Sons</h3>
+          <p>Family haulier, traditional two-tone.</p></div>
+      </div>
+
+      <div class="ex">
+        <video muted loop playsinline preload="metadata"
+               poster="media/exploded-corvus.jpg"
+               aria-label="Exploded view of a model truck in a high-contrast modern wrap">
+          <source src="media/exploded-corvus.webm" type="video/webm">
+          <source src="media/exploded-corvus.mp4" type="video/mp4">
+        </video>
+        <div class="meta"><h3>Corvus Logistics</h3>
+          <p>Modern fleet, high-contrast wrap.</p></div>
+      </div>
+
+      <div class="ex">
+        <video muted loop playsinline preload="metadata"
+               poster="media/exploded-wealdstone.jpg"
+               aria-label="Exploded view of a model truck in a single-colour regional livery">
+          <source src="media/exploded-wealdstone.webm" type="video/webm">
+          <source src="media/exploded-wealdstone.mp4" type="video/mp4">
+        </video>
+        <div class="meta"><h3>Wealdstone Transport</h3>
+          <p>Regional distribution, single-colour.</p></div>
+      </div>
+    </div>
+
+    <p class="ex-note">The three firms above are invented and the liveries are
+      illustrative — they are here to show the format, not to suggest a customer
+      list. Send a photo of one of your trailers and we will build the same thing
+      in your colours, with your registrations on the plates.</p>
+  </div>
+</section>
+
 <!-- ============================ WHY ============================ -->
 <section>
   <div class="wrap">
@@ -523,6 +583,29 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   update();
+})();
+
+// ---- example clips: play only while on screen ----
+// Three autoplaying clips decoding at once is wasteful on a phone, and this
+// page is read on phones in cabs and yards. play() is promise-based and
+// rejects if the browser blocks it - swallow that, the poster still shows.
+(function () {
+  var vids = document.querySelectorAll('.ex video');
+  if (!vids.length) return;
+
+  function play(v)  { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+
+  if (!('IntersectionObserver' in window)) {
+    vids.forEach(play);                 // old browser: just run them
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) play(e.target);
+      else e.target.pause();
+    });
+  }, { threshold: 0.25 });
+  vids.forEach(function (v) { io.observe(v); });
 })();
 </script>
 

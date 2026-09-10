@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<title>__FIRM__ — exploded view frame</title>
+<style>
+  html,body{margin:0;padding:0;background:#0b1f33;}
+  /* Fixed pixel stage. The renderer screenshots this element, so its size IS
+     the video resolution - do not make it responsive. */
+  #stage{width:1280px;height:720px;position:relative;overflow:hidden;
+         background:radial-gradient(120% 100% at 50% 34%,#1b4269 0%,#08192a 100%);}
+  svg{width:100%;height:100%;display:block}
+  .cap{position:absolute;left:44px;top:36px;color:#cfe0ee;
+       font-family:"Segoe UI",Arial,sans-serif}
+  /* Type is deliberately oversized for the frame: these clips are displayed
+     ~300-500px wide in a card, so 15px here would render at about 4px. */
+  .cap b{display:block;font-size:38px;font-weight:800;letter-spacing:-.02em;color:#fff}
+  .cap span{font-size:20px;color:#8fa9c0}
+  .mark{position:absolute;right:44px;top:44px;
+        font-family:"Segoe UI",Arial,sans-serif;font-size:22px;font-weight:800;
+        letter-spacing:.04em;color:#5f88ae}
+  .mark i{color:#ff5c74;font-style:normal}
+  .disc{position:absolute;left:44px;bottom:28px;
+        font-family:"Segoe UI",Arial,sans-serif;font-size:17px;color:#5b7c99}
+  .plabel{opacity:0}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="cap"><b>__FIRM__</b><span>__STRAP__</span></div>
+  <div class="mark">BLAST<i>OYS</i></div>
+  <div class="disc">Illustrative example — not a real firm. 1:50 scale display model.</div>
+
+  <!-- Wide enough that the right-hand leader labels have room at 23px; a
+       narrower box clips "Livery + plates" off the edge of the frame. -->
+  <svg viewBox="-235 -60 1405 645" id="exploded">
+    <defs>
+      <linearGradient id="cab2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="__CAB_TOP__"/><stop offset="100%" stop-color="__CAB_BOT__"/>
+      </linearGradient>
+      <linearGradient id="box2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="__BOX_TOP__"/><stop offset="100%" stop-color="__BOX_BOT__"/>
+      </linearGradient>
+      <linearGradient id="chrome2" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#eef4f8"/><stop offset="100%" stop-color="#4b5c6b"/>
+      </linearGradient>
+    </defs>
+
+    <!-- gift box -->
+    <g class="part" data-dx="0" data-dy="150" data-at="0.86" data-fade="1">
+      <rect x="300" y="322" width="300" height="66" rx="5" fill="#1d3f63" stroke="#5d8cb8" stroke-width="1.5"/>
+      <path d="M300 322 L450 284 L600 322 L450 352 Z" fill="#2a5a8a" stroke="#5d8cb8" stroke-width="1.5"/>
+      <text x="450" y="364" font-family="Segoe UI,Arial" font-size="15" font-weight="800"
+            fill="#bcd4e8" text-anchor="middle" letter-spacing="4">BLASTOYS</text>
+    </g>
+
+    <!-- wheels -->
+    <g class="part" data-dx="0" data-dy="86" data-at="0.70">
+      <circle cx="230" cy="266" r="25" fill="#0e1720"/><circle cx="230" cy="266" r="11" fill="url(#chrome2)"/>
+      <circle cx="296" cy="266" r="25" fill="#0e1720"/><circle cx="296" cy="266" r="11" fill="url(#chrome2)"/>
+      <circle cx="560" cy="266" r="25" fill="#0e1720"/><circle cx="560" cy="266" r="11" fill="url(#chrome2)"/>
+      <circle cx="626" cy="266" r="25" fill="#0e1720"/><circle cx="626" cy="266" r="11" fill="url(#chrome2)"/>
+    </g>
+
+    <!-- chassis -->
+    <g class="part" data-dx="0" data-dy="44" data-at="0.55">
+      <rect x="186" y="240" width="500" height="15" rx="2" fill="#22323f"/>
+      <rect x="186" y="240" width="500" height="4"  fill="#41556b"/>
+    </g>
+
+    <!-- cab -->
+    <g class="part" data-dx="-196" data-dy="-24" data-at="0.16">
+      <!-- Rim light. A dark livery (e.g. a black cab) otherwise vanishes into
+           the navy background and the part reads as missing, not dark. -->
+      <path d="M186 240 L186 150 Q186 136 200 136 L262 136 L300 190 L300 240 Z"
+            fill="url(#cab2)" stroke="rgba(255,255,255,.34)" stroke-width="1.4"/>
+      <path d="M203 150 L253 150 L283 190 L203 190 Z" fill="#8fc0e4"/>
+      <line x1="266" y1="190" x2="266" y2="240" stroke="__CAB_BOT__" stroke-width="2.5"/>
+      <rect x="300" y="209" width="40" height="31" fill="#22323f"/>
+      <rect x="162" y="224" width="25" height="11" rx="2" fill="#f5d000" stroke="#b39b00"/>
+      <rect x="304" y="148" width="9" height="61" rx="4" fill="url(#chrome2)"/>
+    </g>
+
+    <!-- container -->
+    <g class="part" data-dx="188" data-dy="-30" data-at="0.30">
+      <rect x="386" y="130" width="300" height="108" rx="4" fill="url(#box2)"/>
+      <rect x="396" y="140" width="280" height="88" rx="3" fill="__BOX_INNER__"/>
+      <text x="536" y="193" font-family="Segoe UI,Arial" font-size="__LIVERY_SIZE__" font-weight="800"
+            fill="__LIVERY_FILL__" text-anchor="middle" letter-spacing="2">__LIVERY_TEXT__</text>
+      <line x1="686" y1="130" x2="686" y2="238" stroke="#0c2136" stroke-width="3"/>
+    </g>
+
+    <!-- decal sheet -->
+    <g class="part" data-dx="188" data-dy="-152" data-at="0.42" data-fade="1">
+      <rect x="396" y="140" width="280" height="88" rx="3" fill="#f4f8fb" stroke="#c3d3df"/>
+      <rect x="410" y="154" width="150" height="26" rx="2" fill="__BAND__"/>
+      <text x="485" y="173" font-family="Segoe UI,Arial" font-size="13" font-weight="800"
+            fill="#fff" text-anchor="middle" letter-spacing="1">__LIVERY_TEXT__</text>
+      <rect x="410" y="190" width="98" height="9" rx="2" fill="#8fa8bd"/>
+      <rect x="410" y="205" width="70" height="9" rx="2" fill="#8fa8bd"/>
+      <rect x="580" y="154" width="46" height="16" rx="2" fill="#f5d000" stroke="#b39b00"/>
+      <rect x="580" y="176" width="46" height="16" rx="2" fill="#f5d000" stroke="#b39b00"/>
+      <rect x="580" y="198" width="46" height="16" rx="2" fill="#f5d000" stroke="#b39b00"/>
+      <text x="603" y="167" font-family="Arial" font-size="9" fill="#4a4000" text-anchor="middle">__PLATE__</text>
+      <text x="603" y="189" font-family="Arial" font-size="9" fill="#4a4000" text-anchor="middle">__PLATE__</text>
+      <text x="603" y="211" font-family="Arial" font-size="9" fill="#4a4000" text-anchor="middle">__PLATE__</text>
+    </g>
+
+    <!-- labels -->
+    <g font-family="Segoe UI,Arial" font-size="23" font-weight="700" fill="#cfe0ee">
+      <g class="plabel" data-show="0.20">
+        <line x1="-46" y1="168" x2="-12" y2="168" stroke="#4d7ba6"/>
+        <text x="-56" y="173" text-anchor="end">Diecast cab</text>
+      </g>
+      <g class="plabel" data-show="0.34">
+        <line x1="884" y1="156" x2="928" y2="156" stroke="#4d7ba6"/>
+        <text x="938" y="161">Container</text>
+      </g>
+      <g class="plabel" data-show="0.46">
+        <line x1="874" y1="34" x2="928" y2="34" stroke="#4d7ba6"/>
+        <text x="938" y="39">Livery + plates</text>
+      </g>
+      <g class="plabel" data-show="0.58">
+        <line x1="176" y1="292" x2="120" y2="292" stroke="#4d7ba6"/>
+        <text x="110" y="297" text-anchor="end">Chassis</text>
+      </g>
+      <g class="plabel" data-show="0.74">
+        <line x1="196" y1="352" x2="120" y2="352" stroke="#4d7ba6"/>
+        <text x="110" y="357" text-anchor="end">Rubber-tyred wheels</text>
+      </g>
+      <g class="plabel" data-show="0.90">
+        <line x1="612" y1="448" x2="672" y2="448" stroke="#4d7ba6"/>
+        <text x="682" y="453">Gift box</text>
+      </g>
+    </g>
+  </svg>
+</div>
+
+<script>
+// Same maths as the live page's scroll rig, driven by an explicit t instead of
+// scroll position. Keeping them identical means the video and the page cannot
+// drift apart.
+var parts  = document.querySelectorAll('#exploded .part');
+var labels = document.querySelectorAll('#exploded .plabel');
+
+function ease(x){ return x < 0.5 ? 2*x*x : 1 - Math.pow(-2*x + 2, 2) / 2; }
+
+function partProgress(p, t){
+  var at = parseFloat(p.dataset.at || 0);
+  var span = Math.min(0.30, 1 - at);
+  return Math.max(0, Math.min(1, (t - at) / span));
+}
+
+function apply(p, t){
+  var dx = parseFloat(p.dataset.dx || 0) * t;
+  var dy = parseFloat(p.dataset.dy || 0) * t;
+  p.setAttribute('transform', 'translate(' + dx.toFixed(2) + ',' + dy.toFixed(2) + ')');
+  if (p.dataset.fade) p.setAttribute('opacity', Math.min(1, t * 2.2).toFixed(3));
+}
+
+// Called by the renderer once per frame.
+window.setProgress = function (t) {
+  parts.forEach(function (p) { apply(p, ease(partProgress(p, t))); });
+  labels.forEach(function (l) {
+    l.style.opacity = (t >= parseFloat(l.dataset.show || 0)) ? 1 : 0;
+  });
+};
+window.setProgress(0);
+</script>
+</body>
+</html>
