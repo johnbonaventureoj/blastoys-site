@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Blastoys — December Office Edition | Branded model trucks for UK haulage</title>
 <meta name="description" content="Your fleet's livery on a 1:50 scale model truck. Corporate Christmas gifts and driver long-service awards for UK haulage firms.">
+<link rel="canonical" href="https://blastoys.uk/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://blastoys.uk/">
+<meta property="og:site_name" content="Blastoys">
+<meta property="og:title" content="Your fleet. On their desk. — Blastoys December Office Edition">
+<meta property="og:description" content="1:50 scale model trucks in your own livery, with your real fleet registrations on the plates. For UK haulage firms.">
+<meta property="og:image" content="https://blastoys.uk/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b1f33">
 <style>
   :root{
     --navy:#0b1f33; --navy-2:#16375a; --steel:#1d4870; --red:#c8102e;
@@ -101,9 +112,126 @@
   footer p{margin:0 0 5px}
   .fine{margin-top:15px;font-size:12.5px;color:#8896a4;max-width:760px}
 
+  /* ---------- photography ---------- */
+  img{max-width:100%;height:auto;display:block}
+
+  /* hero photo sits in the same panel the SVG used, so the shadow and the
+     rounded corner treatment carry over unchanged */
+  .studio .panel img{width:100%;aspect-ratio:16/9;object-fit:cover}
+
+  /* card imagery: fixed ratio so the three cards stay level whatever the
+     source crop is */
+  .card{padding:0;overflow:hidden}
+  .card figure{margin:0}
+  .card img{width:100%;aspect-ratio:4/3;object-fit:cover;
+            transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+  .card:hover img{transform:scale(1.035)}
+  .card .body{padding:20px 22px 24px}
+
+  /* full-bleed band used by the process + product sections */
+  .shot{border-radius:12px;overflow:hidden;border:1px solid var(--line);
+        box-shadow:0 14px 34px rgba(11,31,51,.10);margin:0 0 30px}
+  .shot img{width:100%;object-fit:cover}
+  .shot.wide img{aspect-ratio:16/9}
+
+  /* product section: specs beside a detail shot */
+  .productgrid{display:grid;gap:34px;align-items:start;
+               grid-template-columns:minmax(0,1.05fr) minmax(0,1fr)}
+  .productgrid .shot{margin:0}
+  .productgrid .shot img{aspect-ratio:3/2}
+  .cap{font-size:12px;color:#8896a4;margin:9px 0 0;letter-spacing:.01em}
+
+  /* ================= motion layer =================
+     Everything here is gated behind .js so that with scripting off the page
+     renders fully visible and static rather than blank. */
+
+  .sprog{position:fixed;top:0;left:0;height:2px;width:100%;background:var(--red);
+         transform:scaleX(0);transform-origin:0 50%;z-index:999;
+         will-change:transform;pointer-events:none}
+
+  /* --- generic rise-in ---
+     The hidden state is declared against real selectors rather than a class
+     added by script, so nothing flashes visible before the observer runs. */
+  .js section h2,
+  .js .sub,
+  .js .explode-head > *,
+  .js .card,
+  .js .step,
+  .js .deadline,
+  .js .specs tr,
+  .js .cap,
+  .js .cta-band p,
+  .js .cta-band .cta{
+    opacity:0;transform:translate3d(0,32px,0);
+    transition:opacity .85s cubic-bezier(.16,1,.3,1) var(--d,0s),
+               transform .85s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+  /* doubled class so this outranks the longer selectors above (.specs tr,
+     .cta-band .cta) without resorting to !important */
+  .js .vis.vis{opacity:1;transform:none}
+
+  /* --- masked image reveal: the picture wipes open while settling back from
+         a slight push-in.
+     NB: the clip goes on the image, never on .mask itself. A fully clipped
+     element has zero visible area, so an IntersectionObserver watching it
+     reports ratio 0 forever and the reveal can never fire. */
+  .js .mask{background:#0e2338}
+  .js .mask img{clip-path:inset(0 0 100% 0);transform:scale(1.14);
+                transition:clip-path 1.2s cubic-bezier(.16,1,.3,1) var(--d,0s),
+                           transform 1.6s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+  .js .mask.in img{clip-path:inset(0 0 0 0);transform:scale(1)}
+
+  /* --- hero entrance --- */
+  .js .hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom;
+                  padding-bottom:.06em}
+  .js .hero h1 .w i{display:inline-block;font-style:normal;
+                    transform:translateY(110%);
+                    transition:transform 1.05s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+  .js .hero.lit h1 .w i{transform:none}
+  .js .hero .tag,
+  .js .hero p.lead,
+  .js .hero .cta{opacity:0;transform:translateY(20px);
+                 transition:opacity .8s ease var(--d,0s),
+                            transform .8s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+  .js .hero.lit .tag,
+  .js .hero.lit p.lead,
+  .js .hero.lit .cta{opacity:1;transform:none}
+  .js .studio{opacity:0;transform:translateY(40px);
+              transition:opacity 1.1s ease .35s,transform 1.1s cubic-bezier(.16,1,.3,1) .35s}
+  .js .hero.lit .studio{opacity:1;transform:none}
+
+  /* the hero photo drifts against the scroll; JS writes --py */
+  .studio .panel img{will-change:transform}
+  .js .studio .panel img{transform:translate3d(0,var(--py,0px),0) scale(1.06)}
+
+  /* --- numbered steps draw a connecting rule as they arrive --- */
+  .js .step::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;
+                   width:0;background:var(--red);
+                   transition:width .7s cubic-bezier(.16,1,.3,1) var(--d,0s)}
+  .js .step.in::after{width:100%}
+
+  /* --- sticky detail shot beside the spec table --- */
+  @media(min-width:761px){ .productgrid .sticky{position:sticky;top:74px} }
+
+  @media (max-width:760px){
+    .productgrid{grid-template-columns:1fr;gap:26px}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .js section h2,.js .sub,.js .explode-head > *,
+    .js .card,.js .step,.js .deadline,.js .specs tr,.js .cap,
+    .js .cta-band p,.js .cta-band .cta,
+    .js .mask img,.js .studio,
+    .js .hero h1 .w i,.js .hero .tag,.js .hero p.lead,.js .hero .cta{
+      opacity:1!important;transform:none!important;
+      clip-path:none!important;transition:none!important}
+    .js .studio .panel img{transform:none!important}
+    .js .step::after{display:none}
+    .sprog{display:none}
+  }
   @media (max-width:640px){
     .explode-scroll{height:300vh}
     .cta.ghost{margin-left:0;margin-top:10px}
+    .shot.wide img{aspect-ratio:4/3}
   }
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
@@ -112,8 +240,11 @@
     .plabel{opacity:1}
   }
 </style>
+<script>document.documentElement.className+=' js';</script>
 </head>
 <body>
+
+<div class="sprog" id="sprog" aria-hidden="true"></div>
 
 <header>
   <div class="wrap bar">
@@ -138,103 +269,11 @@
   </div>
 
   <div class="studio"><div class="panel">
-    <svg viewBox="60 84 790 300" role="img" aria-label="Studio visualisation of a 1:50 model truck in customer livery">
-      <defs>
-        <radialGradient id="sweep" cx="50%" cy="38%" r="72%">
-          <stop offset="0%"  stop-color="#2b5c8c"/>
-          <stop offset="55%" stop-color="#15375a"/>
-          <stop offset="100%" stop-color="#091a2c"/>
-        </radialGradient>
-        <linearGradient id="cabPaint" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#ff4d63"/>
-          <stop offset="42%"  stop-color="#c8102e"/>
-          <stop offset="100%" stop-color="#7d0a1d"/>
-        </linearGradient>
-        <linearGradient id="boxPaint" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#2f6ea8"/>
-          <stop offset="45%"  stop-color="#1d4870"/>
-          <stop offset="100%" stop-color="#102a45"/>
-        </linearGradient>
-        <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%"   stop-color="#dff0ff"/>
-          <stop offset="60%"  stop-color="#8fc0e4"/>
-          <stop offset="100%" stop-color="#4d84ad"/>
-        </linearGradient>
-        <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#eef4f8"/>
-          <stop offset="50%"  stop-color="#93a6b6"/>
-          <stop offset="100%" stop-color="#4b5c6b"/>
-        </linearGradient>
-        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%"   stop-color="#fff" stop-opacity=".20"/>
-          <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
-        </linearGradient>
-        <radialGradient id="contact" cx="50%" cy="50%" r="50%">
-          <stop offset="0%"   stop-color="#000" stop-opacity=".55"/>
-          <stop offset="70%"  stop-color="#000" stop-opacity=".18"/>
-          <stop offset="100%" stop-color="#000" stop-opacity="0"/>
-        </radialGradient>
-        <filter id="soften" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="7"/>
-        </filter>
-        <clipPath id="reflectClip"><rect x="0" y="300" width="900" height="86"/></clipPath>
-      </defs>
-
-      <rect width="900" height="430" fill="url(#sweep)"/>
-
-      <!-- contact shadow -->
-      <ellipse cx="450" cy="308" rx="290" ry="26" fill="url(#contact)"/>
-
-      <!-- ===== truck (reused by reflection) ===== -->
-      <g id="truck">
-        <!-- container -->
-        <rect x="352" y="132" width="330" height="112" rx="4" fill="url(#boxPaint)"/>
-        <rect x="362" y="142" width="310" height="92" rx="3" fill="#1a4066"/>
-        <text x="517" y="198" font-family="Segoe UI,Arial" font-size="23" font-weight="700"
-              fill="#89b4d8" text-anchor="middle" letter-spacing="6">YOUR LIVERY</text>
-        <rect x="352" y="132" width="330" height="46" rx="4" fill="url(#fade)"/>
-        <line x1="682" y1="132" x2="682" y2="244" stroke="#0c2136" stroke-width="3"/>
-        <!-- chassis -->
-        <rect x="150" y="244" width="532" height="14" fill="#22323f"/>
-        <rect x="150" y="244" width="532" height="4"  fill="#3c4f5e"/>
-        <!-- cab -->
-        <path d="M150 244 L150 152 Q150 138 165 138 L228 138 L268 194 L268 244 Z" fill="url(#cabPaint)"/>
-        <path d="M168 152 L219 152 L250 194 L168 194 Z" fill="url(#glass)"/>
-        <path d="M150 244 L150 152 Q150 138 165 138 L228 138 L233 145 L160 145 L160 244 Z"
-              fill="#fff" opacity=".16"/>
-        <line x1="232" y1="194" x2="232" y2="244" stroke="#7d0a1d" stroke-width="2.5"/>
-        <rect x="268" y="212" width="42" height="32" fill="#22323f"/>
-        <!-- lamps + plate -->
-        <rect x="150" y="222" width="9" height="10" rx="2" fill="#ffe9a8"/>
-        <rect x="126" y="228" width="26" height="11" rx="2" fill="var(--gold)"/>
-        <rect x="126" y="228" width="26" height="11" rx="2" fill="none" stroke="#b39b00"/>
-        <!-- exhaust -->
-        <rect x="272" y="150" width="9" height="62" rx="4" fill="url(#chrome)"/>
-        <!-- wheels -->
-        <g>
-          <circle cx="196" cy="266" r="27" fill="#0e1720"/>
-          <circle cx="196" cy="266" r="12" fill="url(#chrome)"/>
-          <circle cx="196" cy="266" r="4"  fill="#2c3a47"/>
-          <circle cx="262" cy="266" r="27" fill="#0e1720"/>
-          <circle cx="262" cy="266" r="12" fill="url(#chrome)"/>
-          <circle cx="262" cy="266" r="4"  fill="#2c3a47"/>
-          <circle cx="556" cy="266" r="27" fill="#0e1720"/>
-          <circle cx="556" cy="266" r="12" fill="url(#chrome)"/>
-          <circle cx="556" cy="266" r="4"  fill="#2c3a47"/>
-          <circle cx="622" cy="266" r="27" fill="#0e1720"/>
-          <circle cx="622" cy="266" r="12" fill="url(#chrome)"/>
-          <circle cx="622" cy="266" r="4"  fill="#2c3a47"/>
-        </g>
-      </g>
-
-      <!-- floor reflection -->
-      <g clip-path="url(#reflectClip)" opacity=".22">
-        <use href="#truck" transform="matrix(1,0,0,-1,0,600)" filter="url(#soften)"/>
-      </g>
-      <rect x="0" y="300" width="900" height="130" fill="url(#sweep)" opacity=".55"/>
-    </svg>
+    <img src="img/hero.webp" width="1800" height="1004" fetchpriority="high"
+         alt="A 1:50 scale model articulated lorry on an office desk beside a laptop, with a plain red cab and a blank blue trailer ready for a customer livery.">
   </div></div>
-  <div class="shotnote">Product visualisation. Livery shown is illustrative.</div>
+  <div class="shotnote">Product visualisation — not a photograph of stock. Cab is a
+    generic European style and the livery shown is illustrative.</div>
 </div>
 
 <!-- ==================== SCROLL EXPLODED VIEW ==================== -->
@@ -373,15 +412,33 @@
        lorry sits on a desk, in reception, or on a shelf at home — and it stays
        there for years.</p>
     <div class="grid">
-      <div class="card"><h3>Customer gifts</h3>
-        <p>Something your best accounts actually keep, with your livery on it,
-           in front of them all year.</p></div>
-      <div class="card"><h3>Driver long-service awards</h3>
-        <p>Ten years on the road deserves better than a card. Their truck,
-           their plate, in a box.</p></div>
-      <div class="card"><h3>Trade shows and open days</h3>
-        <p>The one thing on the stand people pick up and put in their pocket
-           instead of the bin.</p></div>
+      <div class="card">
+        <img src="img/gift.webp" width="900" height="672" loading="lazy"
+             alt="A model lorry seated in a foam-lined navy presentation gift box with the lid lifted off.">
+        <div class="body">
+          <h3>Customer gifts</h3>
+          <p>Something your best accounts actually keep, with your livery on it,
+             in front of them all year.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/award.webp" width="900" height="672" loading="lazy"
+             alt="A model lorry mounted on a hardwood plinth with a blank brass plaque, lit as a long-service award.">
+        <div class="body">
+          <h3>Driver long-service awards</h3>
+          <p>Ten years on the road deserves better than a card. Their truck,
+             their plate, in a box.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="img/tradeshow.webp" width="900" height="672" loading="lazy"
+             alt="Five model lorries in different cab colours lined up along a white exhibition counter.">
+        <div class="body">
+          <h3>Trade shows and open days</h3>
+          <p>The one thing on the stand people pick up and put in their pocket
+             instead of the bin.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -392,6 +449,12 @@
     <h2>How it works</h2>
     <p class="sub">Five steps, about five to six weeks from the moment you
        approve the artwork.</p>
+
+    <div class="shot wide mask">
+      <img src="img/flatlay.webp" width="1600" height="1074" loading="lazy"
+           alt="Overhead view of a model lorry laid out beside a sheet of blank decal film, a strip of colour swatches and a pair of tweezers.">
+    </div>
+
     <div class="steps">
       <div class="step"><h4>Send your livery</h4>
         <p>A photo of one of your trailers is enough to start. Fleet numbers too,
@@ -416,6 +479,7 @@
   <div class="wrap">
     <h2>The product</h2>
     <p class="sub">Built as a display piece, not a toy.</p>
+    <div class="productgrid">
     <table class="specs">
       <tr><td>Scale</td><td>1:50</td></tr>
       <tr><td>Construction</td><td>Diecast metal cab and chassis</td></tr>
@@ -427,6 +491,16 @@
       <tr><td>Packaging</td><td>Individual gift box</td></tr>
       <tr><td>Minimum order</td><td>50 units</td></tr>
     </table>
+
+      <div class="sticky">
+        <div class="shot mask">
+          <img src="img/plate.webp" width="1400" height="940" loading="lazy"
+               alt="Close-up macro of the front bumper of a model lorry showing a UK-style yellow number plate.">
+        </div>
+        <p class="cap">The plates are the part people notice. Send us your fleet
+           registrations and each model carries a real one from your yard.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -523,6 +597,140 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   update();
+})();
+
+/* ============================================================
+   Motion layer: entrance, reveal-on-scroll, parallax, inertia.
+   Deliberately dependency-free — the whole site is one file.
+   ============================================================ */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var prog   = document.getElementById('sprog');
+  var hero   = document.querySelector('.hero');
+
+  /* ---------- 1. hero entrance ----------
+     Each word gets its own overflow-hidden box so the line climbs into view
+     from behind its own baseline rather than just fading. */
+  var h1 = document.querySelector('.hero h1');
+  if (h1 && !reduce) {
+    var html = h1.innerHTML.split('<br>').map(function (line) {
+      return line.trim().split(/\s+/).map(function (w) {
+        return '<span class="w"><i>' + w + '</i></span>';
+      }).join(' ');
+    }).join('<br>');
+    h1.innerHTML = html;
+    [].forEach.call(h1.querySelectorAll('.w i'), function (el, i) {
+      el.style.setProperty('--d', (0.05 + i * 0.075) + 's');
+    });
+    var lead = hero.querySelector('p.lead');
+    if (lead) lead.style.setProperty('--d', '.42s');
+    [].forEach.call(hero.querySelectorAll('.cta'), function (el, i) {
+      el.style.setProperty('--d', (0.52 + i * 0.08) + 's');
+    });
+  }
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { if (hero) hero.classList.add('lit'); });
+  });
+
+  /* ---------- 2. reveal on scroll ----------
+     Siblings stagger against each other so a row of cards deals itself in
+     instead of snapping as one block. */
+  var sel = 'section h2, .sub, .explode-head > *, .card, .step, .deadline,' +
+            '.specs tr, .cap, .cta-band p, .cta-band .cta, .mask';
+  var items = [].slice.call(document.querySelectorAll(sel));
+
+  items.forEach(function (el) {
+    var sibs = [].filter.call(el.parentNode.children, function (c) {
+      return items.indexOf(c) > -1;
+    });
+    var i = sibs.indexOf(el);
+    if (i > 0) el.style.setProperty('--d', (i * 0.075).toFixed(3) + 's');
+  });
+
+  function show(el) { el.classList.add(el.classList.contains('mask') ? 'in' : 'vis'); }
+
+  if (!('IntersectionObserver' in window) || reduce) {
+    items.forEach(show);
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        show(e.target);
+        io.unobserve(e.target);          // one-way: no re-hide on scroll back up
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------- 3. hero parallax + scroll progress ---------- */
+  var heroImg = document.querySelector('.studio .panel img');
+  var doc = document.documentElement;
+  var qd = false;
+
+  function frame() {
+    qd = false;
+    if (prog) {
+      var max = doc.scrollHeight - window.innerHeight;
+      prog.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0).toFixed(4) + ')';
+    }
+    if (heroImg && !reduce) {
+      var r = heroImg.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < window.innerHeight) {
+        // drift the picture against the page, inside its own frame
+        heroImg.style.setProperty('--py', (-r.top * 0.06).toFixed(1) + 'px');
+      }
+    }
+  }
+  function queue() { if (!qd) { qd = true; requestAnimationFrame(frame); } }
+  window.addEventListener('scroll', queue, { passive: true });
+  window.addEventListener('resize', queue);
+  frame();
+
+  /* ---------- 4. inertial wheel scrolling ----------
+     Implemented with window.scrollTo rather than a transformed wrapper, so
+     position:sticky and the exploded-view rig above keep working. Pointer-fine
+     only: trackpads and touch already have their own momentum. */
+  if (reduce || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+
+  var target = window.scrollY, cur = window.scrollY, running = false;
+  document.documentElement.style.scrollBehavior = 'auto';
+
+  function limit() { return Math.max(0, doc.scrollHeight - window.innerHeight); }
+
+  function run() {
+    cur += (target - cur) * 0.13;
+    if (Math.abs(target - cur) < 0.5) { cur = target; running = false; }
+    window.scrollTo(0, cur);
+    if (running) requestAnimationFrame(run);
+  }
+
+  window.addEventListener('wheel', function (e) {
+    if (e.ctrlKey || e.defaultPrevented) return;   // leave pinch-zoom alone
+    var d = e.deltaY;
+    if (e.deltaMode === 1) d *= 16;                // line-based mice
+    else if (e.deltaMode === 2) d *= window.innerHeight;
+    e.preventDefault();
+    if (!running) cur = window.scrollY;
+    target = Math.max(0, Math.min(limit(), target + d));
+    if (!running) { running = true; requestAnimationFrame(run); }
+  }, { passive: false });
+
+  // anything that moves the page by other means (keyboard, scrollbar) retargets
+  window.addEventListener('scroll', function () {
+    if (!running) { target = window.scrollY; cur = target; }
+  }, { passive: true });
+
+  // in-page links tween instead of jumping
+  [].forEach.call(document.querySelectorAll('a[href^="#"]'), function (a) {
+    a.addEventListener('click', function (e) {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (!el) return;
+      e.preventDefault();
+      if (!running) cur = window.scrollY;
+      target = Math.max(0, Math.min(limit(), window.scrollY + el.getBoundingClientRect().top));
+      if (!running) { running = true; requestAnimationFrame(run); }
+    });
+  });
 })();
 </script>
 
