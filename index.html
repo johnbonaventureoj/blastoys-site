@@ -135,6 +135,15 @@
   .card .num{position:absolute;top:16px;right:20px;z-index:2;font-weight:800;
              font-size:13px;color:rgba(255,255,255,.62);letter-spacing:.1em}
 
+  /* range cards: five of the six have no photography yet, so the tile is a
+     flat-colour icon panel (CSS/SVG only) instead of an invented image. */
+  .card .icon{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+              background:var(--panel)}
+  .card .icon svg{width:58%;height:58%;display:block}
+  .card .pricetag{margin:12px 0 0;font-size:16px;color:var(--muted)}
+  .card .pricetag b{color:var(--ink);font-weight:800}
+  .card .moq{margin:4px 0 0;font-size:12px;color:var(--dim);letter-spacing:.02em}
+
   /* ---------- pinned horizontal gallery ---------- */
   .rail-outer{background:var(--bg-2);border-block:1px solid var(--line)}
   .rail-scroll{height:300vh;position:relative}
@@ -301,6 +310,7 @@
       <a href="#build">What's in the box</a>
       <a href="#how">How it works</a>
       <a href="#product">The product</a>
+      <a href="#range">The range</a>
     </nav>
     <a class="btn sm" href="mailto:admin@blastoys.uk?subject=December%20Office%20Edition%20-%20enquiry">Request a quote</a>
   </div>
@@ -625,6 +635,148 @@
       <p><b>December deadline.</b> Artwork needs to be approved by the end of
       October for delivery before Christmas. Lead time is five to six weeks from
       approval, so orders placed in November will not arrive in time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DECEMBER OFFICE EDITION ==================== -->
+<section id="range">
+  <div class="wrap">
+    <p class="eyebrow rv"><b>06</b> The range <span></span></p>
+    <h2 class="h2 lnwrap">The December<br>Office Edition</h2>
+    <p class="lede rv" style="margin-top:26px">The truck is the flagship. Five more
+      pieces sit alongside it in the same range — desk pieces for the accounts who
+      don't run a fleet, built the same way: your logo, a UK trade decorator, a
+      gift box with your name on it.</p>
+
+    <div class="cards">
+      <div class="card rv">
+        <span class="num">01</span>
+        <div class="pic"><img src="img/tradeshow.webp" width="900" height="672" loading="lazy"
+          alt="Five model lorries in different cab colours lined up along a white exhibition counter."></div>
+        <div class="body">
+          <h3>1:50 truck, your livery</h3>
+          <p class="pricetag">From <b>&pound;25.25</b> at 250 units</p>
+          <p class="moq">MOQ 50 &middot; provisional, pending supplier quotes</p>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <span class="num">02</span>
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 120 96">
+            <ellipse cx="60" cy="70" rx="46" ry="16" fill="none" stroke="#4d7ba6" stroke-width="4"/>
+            <ellipse cx="60" cy="70" rx="20" ry="7" fill="none" stroke="#4d7ba6" stroke-width="3"/>
+            <ellipse cx="60" cy="52" rx="40" ry="14" fill="none" stroke="#4d7ba6" stroke-width="4"/>
+            <ellipse cx="60" cy="52" rx="17" ry="6" fill="none" stroke="#4d7ba6" stroke-width="3"/>
+            <ellipse cx="60" cy="36" rx="34" ry="12" fill="none" stroke="#4d7ba6" stroke-width="4"/>
+            <ellipse cx="60" cy="36" rx="14" ry="5" fill="none" stroke="#4d7ba6" stroke-width="3"/>
+            <line x1="52" y1="30" x2="48" y2="4" stroke="#ff2f4d" stroke-width="3" stroke-linecap="round"/>
+            <line x1="62" y1="30" x2="66" y2="0" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+            <line x1="70" y1="30" x2="76" y2="8" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Stacked-tyre pen pot</h3>
+          <p class="pricetag">From <b>&pound;5.11</b> at 250 units</p>
+          <p class="moq">MOQ 100 &middot; provisional, pending supplier quotes</p>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <span class="num">03</span>
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 120 96">
+            <path d="M30 84 L38 40 L46 40 L54 84 Z" fill="#ff2f4d"/>
+            <rect x="27" y="78" width="30" height="8" rx="2" fill="#c8102e"/>
+            <rect x="33" y="55" width="18" height="6" fill="#eef4f8"/>
+            <path d="M60 84 L70 24 L80 24 L90 84 Z" fill="#ff2f4d"/>
+            <rect x="56" y="78" width="38" height="9" rx="2" fill="#c8102e"/>
+            <rect x="64" y="50" width="22" height="7" fill="#eef4f8"/>
+            <rect x="70" y="34" width="10" height="6" fill="#eef4f8"/>
+            <path d="M90 84 L96 48 L102 48 L108 84 Z" fill="#ff2f4d" opacity=".85"/>
+            <rect x="87" y="78" width="24" height="7" rx="2" fill="#c8102e" opacity=".85"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Mini traffic cone set</h3>
+          <p class="pricetag">From <b>&pound;5.13</b> at 250 units</p>
+          <p class="moq">MOQ 100 &middot; provisional, pending supplier quotes</p>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <span class="num">04</span>
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 120 96">
+            <line x1="14" y1="60" x2="106" y2="60" stroke="#22323f" stroke-width="6"/>
+            <circle cx="24" cy="60" r="18" fill="none" stroke="#cfe0ee" stroke-width="5"/>
+            <circle cx="96" cy="60" r="18" fill="none" stroke="#cfe0ee" stroke-width="5"/>
+            <circle cx="24" cy="60" r="9" fill="none" stroke="#cfe0ee" stroke-width="3"/>
+            <circle cx="96" cy="60" r="9" fill="none" stroke="#cfe0ee" stroke-width="3"/>
+            <line x1="50" y1="54" x2="46" y2="10" stroke="#ff2f4d" stroke-width="3" stroke-linecap="round"/>
+            <line x1="60" y1="54" x2="60" y2="4" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+            <line x1="70" y1="54" x2="76" y2="14" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Barbell-rack pen holder</h3>
+          <p class="pricetag">From <b>&pound;7.48</b> at 250 units</p>
+          <p class="moq">MOQ 100 &middot; provisional, pending supplier quotes</p>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <span class="num">05</span>
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 120 96">
+            <rect x="24" y="40" width="72" height="46" rx="6" fill="none" stroke="#4d7ba6" stroke-width="4"/>
+            <circle cx="42" cy="40" r="10" fill="none" stroke="#eef4f8" stroke-width="4"/>
+            <circle cx="66" cy="40" r="10" fill="none" stroke="#eef4f8" stroke-width="4"/>
+            <circle cx="90" cy="40" r="10" fill="none" stroke="#eef4f8" stroke-width="4"/>
+            <line x1="38" y1="30" x2="36" y2="6" stroke="#ff2f4d" stroke-width="3" stroke-linecap="round"/>
+            <line x1="66" y1="30" x2="66" y2="2" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+            <line x1="94" y1="30" x2="98" y2="10" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+            <rect x="30" y="76" width="60" height="6" rx="2" fill="#22323f"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Engine-block desk organiser</h3>
+          <p class="pricetag">From <b>&pound;16.57</b> at 250 units</p>
+          <p class="moq">MOQ 100 &middot; provisional, pending supplier quotes</p>
+        </div>
+      </div>
+
+      <div class="card rv">
+        <span class="num">06</span>
+        <div class="icon" aria-hidden="true">
+          <svg viewBox="0 0 120 96">
+            <rect x="16" y="26" width="88" height="54" rx="4" fill="none" stroke="#4d7ba6" stroke-width="4"/>
+            <line x1="30" y1="26" x2="30" y2="80" stroke="#2c5580" stroke-width="2"/>
+            <line x1="44" y1="26" x2="44" y2="80" stroke="#2c5580" stroke-width="2"/>
+            <line x1="58" y1="26" x2="58" y2="80" stroke="#2c5580" stroke-width="2"/>
+            <line x1="72" y1="26" x2="72" y2="80" stroke="#2c5580" stroke-width="2"/>
+            <line x1="86" y1="26" x2="86" y2="80" stroke="#2c5580" stroke-width="2"/>
+            <rect x="24" y="34" width="18" height="16" fill="none" stroke="#ff2f4d" stroke-width="2.5"/>
+            <line x1="50" y1="14" x2="48" y2="4" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+            <line x1="60" y1="14" x2="60" y2="2" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+            <line x1="70" y1="14" x2="72" y2="4" stroke="#cfe0ee" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="body">
+          <h3>Shipping-container desk organiser</h3>
+          <p class="pricetag">From <b>&pound;18.93</b> at 250 units</p>
+          <p class="moq">MOQ 100 &middot; provisional, pending supplier quotes</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="deadline rv">
+      <p><b>Provisional pricing.</b> Prices shown are indicative — based on
+      today's blank costs at a 55% margin target — and will be confirmed once
+      supplier quotes are in hand. Minimum order 50 units on the truck, 100
+      units on any desk piece. 50% deposit on order, balance due before
+      dispatch.</p>
     </div>
   </div>
 </section>
